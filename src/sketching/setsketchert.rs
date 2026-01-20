@@ -497,7 +497,7 @@ where
     S: num::Float + SampleUniform + Send + Sync + Debug + Serialize,
 {
     // type Sig = S;
-    type Sig = u64;
+    type Sig = u16;
     fn get_kmer_size(&self) -> usize {
         self.params.get_kmer_size()
     }
@@ -538,7 +538,7 @@ where
             } // end loop
             // do not forget to close sketching (it calls densification!)
             sminhash.end_sketch();
-            let sigb = sminhash.get_hsketch_u64();
+            let sigb = sminhash.get_hsketch_lower16_u16();
             // get back from usize to Kmer32bit ?. If fhash is inversible possible, else NO.
             (i, sigb)
         };
