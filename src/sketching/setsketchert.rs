@@ -455,8 +455,8 @@ where
         // do not forget to close sketching (it calls densification!)
         setsketch.end_sketch();
         //
-        let sig = setsketch.get_hsketch_u64();
-        //
+        //let sig = setsketch.get_hsketch_u64();
+        let sig = setsketch.get_hsketch_lower16_u16();
         vec![sig]
     } // end of sketch_compressedkmer_seqs
 } // end of impl SeqSketcherT<Kmer> for OptDensHashSketch
@@ -586,7 +586,8 @@ where
         // do not forget to close sketching (it calls densification!)
         setsketch.end_sketch();
         //
-        let sig = setsketch.get_hsketch_u64();
+        //let sig = setsketch.get_hsketch_u64();
+        let sig = setsketch.get_hsketch_lower16_u16();
         let v = vec![sig];
         //
         v
