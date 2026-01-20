@@ -509,7 +509,7 @@ where
     S: num::Float + SampleUniform + Send + Sync + Debug + Serialize,
 {
     //type Sig = S;
-    type Sig = u64;
+    type Sig = u16;
     fn get_kmer_size(&self) -> usize {
         self.params.get_kmer_size()
     }
@@ -554,7 +554,7 @@ where
             } // end loop
             // DO NOT forget to call end_sketch as OptDensMinHash needs to be told we got end of stream
             sminhash.end_sketch();
-            let sigb: Vec<u64> = sminhash.get_hsketch_u64();
+            let sigb: Vec<u16> = sminhash.get_hsketch_lower16_u16();
             // get back from usize to Kmer32bit ?. If fhash is inversible possible, else NO.
             (i, sigb)
         };
@@ -640,7 +640,7 @@ where
     KmerGenerator<Kmer>: KmerGenerationPattern<Kmer>,
     S: num::Float + SampleUniform + Send + Sync + Debug + Serialize,
 {
-    type Sig = u64;
+    type Sig = u16;
 
     fn get_kmer_size(&self) -> usize {
         self.params.get_kmer_size()
@@ -682,7 +682,7 @@ where
             } // end loop
             // do not forget to close sketching (it calls densification!)
             sminhash.end_sketch();
-            let sigb: Vec<u64> = sminhash.get_hsketch_u64();
+            let sigb: Vec<u16> = sminhash.get_hsketch_lower16_u16();
             // get back from usize to Kmer32bit ?. If fhash is inversible possible, else NO.
             (i, sigb)
         };
